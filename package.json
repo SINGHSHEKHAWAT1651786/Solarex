@@ -1,0 +1,24 @@
+{
+  "name": "namastereactjs",
+  "version": "1.0.0",
+  "description": "This is a live project",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "author": "Govind",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "parcel": "^2.16.3"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.3.1"
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
+}
