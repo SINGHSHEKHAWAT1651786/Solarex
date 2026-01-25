@@ -60,7 +60,7 @@ return (
         onChange={(e) => setSearchText(e.target.value)}
       />
 
-      <button
+      <button 
         className="search-btn"
         onClick={() => {
           const filteredData = filterData(searchText, allSolars);
