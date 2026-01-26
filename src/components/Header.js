@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Title = () => (
-  <a href="/">
+  <Link to="/">
     <img
       className="logo"
       alt="Solarsant"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxSuZFNdbLTr4YKWrEFZhlyfdlcj8WWMHpqFRmOtGGbw&s"
     />
-  </a>
+  </Link>
 );
 
 const Header = () => {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
 
   return (
     <div className="header">
@@ -21,10 +20,9 @@ const Header = () => {
 
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Cart</li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
         </ul>
       </div>
 

@@ -1,85 +1,85 @@
-
+import { useState, useEffect } from "react";
 import SolarCard from "./SolarCard";
-import { solarList } from "../constants";
-import  {useState, useEffect} from "react";
-import Shimmer from "./Shimmer"; 
+import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 /* ---------------- FILTER FUNCTION ---------------- */
 function filterData(searchText, solars) {
   return solars.filter((solar) =>
-    solar.data.name.toLowerCase().includes(searchText.toLowerCase())
+    solar?.data?.name
+      ?.toLowerCase()
+      .includes(searchText.toLowerCase())
   );
 }
 
 /* ---------------- BODY COMPONENT ---------------- */
 const Body = () => {
-
   const [searchText, setSearchText] = useState("");
-  const [allSolars, setAllSolars] = useState([]); 
+  const [allSolars, setAllSolars] = useState([]);
   const [filteredSolars, setFilteredSolars] = useState([]);
- useEffect(()=>{
-//APIs call
-getSolars(); 
- }, []);
+  const [isLoading, setIsLoading] = useState(true);
 
- async function getSolars() {
+  useEffect(() => {
+    getSolars();
+  }, []);
+
+  useEffect(() => {
+    setFilteredSolars(filterData(searchText, allSolars));
+  }, [searchText, allSolars]);
+
+  async function getSolars() {
     try {
       const res = await fetch(
         "https://apinew.moglix.com/nodeApi/v1/product/getProductFbtDetails?productId=MSN457M8D6WN9J"
       );
       const json = await res.json();
-      console.log(json);
 
       const cards =
-        json?.data?.cards?.[2]?.data?.data?.cards || [];
+        json?.data?.cards?.[2]?.data?.data?.cards ?? [];
 
       setAllSolars(cards);
       setFilteredSolars(cards);
     } catch (err) {
       console.error("API error:", err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
-console.log("render");
+  if (isLoading) {
+    return <Shimmer />;
+  }
 
-if (allSolars.length === 0) {
-  return <Shimmer />;
-}
+  if (!filteredSolars.length) {
+    return <h1>No solars match your filter</h1>;
+  }
 
-if (filteredSolars.length === 0) {
-  return <h1>No solars match your filter</h1>;
-}
-
-return (
-  <>
-    <div className="search-container">
-      <input
-        type="text"
-        className="search-input"
-        placeholder="Search by name"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-
-      <button 
-        className="search-btn"
-        onClick={() => {
-          const filteredData = filterData(searchText, allSolars);
-          setFilteredSolars(filteredData);
-        }}
-      >
-        Search
-      </button>
-    </div>
-
-    <div className="solar-list">
-      {filteredSolars.map((solar, index) => (
-        <SolarCard
-          key={solar?.data?.id || index}
-          {...solar.data}
+  return (
+    <>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search by name"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
         />
-      ))}
-    </div>
-  </>
-);
+      </div>
+
+      <div className="solar-list">
+        {filteredSolars.map((solar) => {
+          return(
+            <Link to= {"/solar" + solar.data.id} key={solar?.data?.id}>
+ <SolarCard
+            
+            {...solar.data}
+          />
+            </Link>
+          );
+         
+        })}
+      </div>
+    </>
+  );
 };
+
 export default Body;
