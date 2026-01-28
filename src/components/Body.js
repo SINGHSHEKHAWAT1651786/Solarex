@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import SolarCard from "./SolarCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { solarList } from "../constants";
+
 /* ---------------- FILTER FUNCTION ---------------- */
 function filterData(searchText, solars) {
   return solars.filter((solar) =>
@@ -17,6 +19,7 @@ const Body = () => {
   const [allSolars, setAllSolars] = useState([]);
   const [filteredSolars, setFilteredSolars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [dataSource, setDataSource] = useState(""); // "api" | "constant"
 
   useEffect(() => {
     getSolars();
@@ -28,18 +31,38 @@ const Body = () => {
 
   async function getSolars() {
     try {
-      const res = await fetch(
-        "https://apinew.moglix.com/nodeApi/v1/product/getProductFbtDetails?productId=MSN457M8D6WN9J"
-      );
-      const json = await res.json();
+      const res = await fetch("url"); // invalid / placeholder API
+
+      if (!res.ok) {
+        throw new Error("API request failed");
+      }
+
+      const responseText = await res.text();
+
+      // 🔒 Prevent HTML response from crashing JSON.parse
+      if (responseText.trim().startsWith("<")) {
+        throw new Error("HTML response received instead of JSON");
+      }
+
+      const json = JSON.parse(responseText);
 
       const cards =
         json?.data?.cards?.[2]?.data?.data?.cards ?? [];
 
+      if (!cards.length) {
+        throw new Error("Empty API response");
+      }
+
       setAllSolars(cards);
       setFilteredSolars(cards);
-    } catch (err) {
-      console.error("API error:", err);
+      setDataSource("api");
+    } catch (error) {
+      console.warn("API failed. Using constant data:", error.message);
+
+      // ✅ Fallback to constants.js
+      setAllSolars(solarList);
+      setFilteredSolars(solarList);
+      setDataSource("constant");
     } finally {
       setIsLoading(false);
     }
@@ -65,18 +88,31 @@ const Body = () => {
         />
       </div>
 
+      {/* Message shown only when searching */}
+      {searchText && (
+        <p className="source-text">
+          {dataSource === "api"
+            ? "This is APIs value"
+            : "This is constant.js value"}
+        </p>
+      )}
+
+      {/* Optional info when API fails */}
+      {dataSource === "constant" && (
+        <p className="warning-text">
+          API unavailable. Showing fallback data.
+        </p>
+      )}
+
       <div className="solar-list">
-        {filteredSolars.map((solar) => {
-          return(
-            <Link to= {"/solar" + solar.data.id} key={solar?.data?.id}>
- <SolarCard
-            
-            {...solar.data}
-          />
-            </Link>
-          );
-         
-        })}
+        {filteredSolars.map((solar) => (
+          <Link
+            to={"/solar/" + solar?.data?.id}
+            key={solar?.data?.id}
+          >
+            <SolarCard {...solar.data} />
+          </Link>
+        ))}
       </div>
     </>
   );

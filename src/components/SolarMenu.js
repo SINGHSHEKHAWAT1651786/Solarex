@@ -25,10 +25,10 @@ const SolarMenu = () => {
         src={IMG_CDN_URL + solar.cloudinaryImageId}
       />
 
-      <h3>{solar.area}</h3>
-      <h3>{solar.city}</h3>
-      <h3>{solar.avgRating} stars</h3>
-      <h3>{solar.costForTwoMsg}</h3>
+      <h3>{solar?.area}</h3>
+      <h3>{solar?.city}</h3>
+      <h3>{solar?.avgRating} stars</h3>
+      <h3>{solar?.costForTwoMsg}</h3>
     </div>
 
     <div>
