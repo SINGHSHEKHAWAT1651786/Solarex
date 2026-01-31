@@ -1,4 +1,6 @@
+//APIs link 
 export const IMG_CDN_URL = "";
+export const FETCH_MENU_URL = "";
 export const solarList = [
   {
     type: "solar",

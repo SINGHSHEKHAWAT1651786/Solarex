@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import useOnline from "../utils/useOnline";
 const Title = () => (
   <Link to="/">
     <img
@@ -13,7 +13,7 @@ const Title = () => (
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+ const isOnline = useOnline();
   return (
     <div className="header">
       <Title />
@@ -23,6 +23,7 @@ const Header = () => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
+           <li><Link to="/instamart">Instamart</Link></li>
         </ul>
       </div>
 

@@ -2,19 +2,15 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
+import useSolar from "../utils/useSolar";
+
+import Shimmer from "./Shimmer";
 const SolarMenu = () => {
     const {resId} = useParams();
-   //Apis for Solar Info
-   const [solar, setSolar] = useState(null); 
-    useEffect(()=>{
-    getSolarInfo();
-   }, []);
-   async function getSolarInfo(){
-    const data = await fetch("url" + resId)
-    const json = await data.json();
-    console.log(json.data);
-    setSolar(json.data);
-   }
+   
+  
+   const solar = useSolar(resId);
+  
    return (!restaurant)? <Shimmer/> :(
   <div className="menu">
     <div>
@@ -29,7 +25,7 @@ const SolarMenu = () => {
       <h3>{solar?.city}</h3>
       <h3>{solar?.avgRating} stars</h3>
       <h3>{solar?.costForTwoMsg}</h3>
-    </div>
+    </div>  
 
     <div>
       <h1>Menu</h1>

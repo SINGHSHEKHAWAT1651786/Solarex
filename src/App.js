@@ -7,15 +7,19 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
-import SolarMenu from "./components/Solarmenu";
+import SolarMenu from "./components/SolarMenu";
+import Instamart from  "./components/Instamart";
 import Profile from "./components/Profile";
-const AppLayout = () => (
-  <>
+const AppLayout = () => {
+ return(
+<>
     <Header />
     <Outlet />
     <Footer />
   </>
-);
+ );
+ 
+};
 
 const appRouter = createBrowserRouter([
   {
@@ -44,6 +48,10 @@ const appRouter = createBrowserRouter([
           {
         path: "/solar/:resId",
        element: <SolarMenu/>,
+      },
+         {
+        path: "instamart",
+       element: <Instamart/>,
       },
     ],
   },

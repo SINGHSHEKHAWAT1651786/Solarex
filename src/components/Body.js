@@ -3,16 +3,8 @@ import SolarCard from "./SolarCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { solarList } from "../constants";
-
-/* ---------------- FILTER FUNCTION ---------------- */
-function filterData(searchText, solars) {
-  return solars.filter((solar) =>
-    solar?.data?.name
-      ?.toLowerCase()
-      .includes(searchText.toLowerCase())
-  );
-}
-
+import {filterData} from "../utils/helper"; 
+import useOnline from "../utils/useOnline";
 /* ---------------- BODY COMPONENT ---------------- */
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -67,7 +59,11 @@ const Body = () => {
       setIsLoading(false);
     }
   }
-
+// Error on the page 
+ const isOnLine = useOnline();
+ if(!isOnLine){
+  return <h1>Offline, please check your internet</h1>
+ }
   if (isLoading) {
     return <Shimmer />;
   }
