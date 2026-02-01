@@ -1,15 +1,19 @@
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-
+import React, {lazy, Suspense} from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import About from "./components/About";
+
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import SolarMenu from "./components/SolarMenu";
 import Instamart from  "./components/Instamart";
 import Profile from "./components/Profile";
+import Shimmer from "./components/Shimmer";
+
+const Instamart = lazy(()=> import ("./components/Instamart"));
+const About = lazy(()=> import ("./components/About"));
 const AppLayout = () => {
  return(
 <>
@@ -33,7 +37,10 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "about",
-        element: <About />,
+         element:(
+        <Suspense fallback = {<h1>Loading...</h1>}><About/>
+        </Suspense>
+       ) ,
         children:[
           {
             path:"profile",
@@ -51,7 +58,10 @@ const appRouter = createBrowserRouter([
       },
          {
         path: "instamart",
-       element: <Instamart/>,
+       element:(
+        <Suspense fallback = {<Shimmer/>}><Instamart/>
+        </Suspense>
+       ) , 
       },
     ],
   },
