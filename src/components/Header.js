@@ -4,7 +4,7 @@ import useOnline from "../utils/useOnline";
 const Title = () => (
   <Link to="/">
     <img
-      className="logo"
+      className="h-"
       alt="Solarsant"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxSuZFNdbLTr4YKWrEFZhlyfdlcj8WWMHpqFRmOtGGbw&s"
     />
@@ -15,7 +15,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
  const isOnline = useOnline();
   return (
-    <div className="header">
+    <div className="flex">
       <Title />
 
       <div className="nav-items">

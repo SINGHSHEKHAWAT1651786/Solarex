@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import SolarMenu from "./components/SolarMenu";
-import Instamart from  "./components/Instamart";
+
 import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
 
