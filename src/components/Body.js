@@ -6,7 +6,7 @@ import { solarList } from "../constants";
 import {filterData} from "../utils/helper"; 
 import useOnline from "../utils/useOnline";
 /* ---------------- BODY COMPONENT ---------------- */
-const Body = () => {
+const Body = (user) => {
   const [searchText, setSearchText] = useState("");
   const [allSolars, setAllSolars] = useState([]);
   const [filteredSolars, setFilteredSolars] = useState([]);
@@ -74,14 +74,18 @@ const Body = () => {
 
   return (
     <>
-      <div className="search-container">
+      <div className="search-container p-5 bg-pink-50 my-5">
         <input
           type="text"
-          className="search-input"
+          className="focus: bg-green-200 p-2 m-2"
           placeholder="Search by name"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
+        <button className="p-1 m-1 bg-purple-900 hover:bg-yellow-600 text-white rounded-md " onClick={()=>{
+          const data =filterData(searchText, allSolars);
+          setFilteredSolars(data);
+        }}>Search</button>
       </div>
 
       {/* Message shown only when searching */}
@@ -100,13 +104,13 @@ const Body = () => {
         </p>
       )}
 
-      <div className="solar-list">
+      <div className="flex flex-wrap bg-pink-500 ">
         {filteredSolars.map((solar) => (
           <Link
             to={"/solar/" + solar?.data?.id}
             key={solar?.data?.id}
           >
-            <SolarCard {...solar.data} />
+            <SolarCard {...solar.data} user = {user} />
           </Link>
         ))}
       </div>

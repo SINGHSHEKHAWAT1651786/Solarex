@@ -15,6 +15,10 @@ import Shimmer from "./components/Shimmer";
 const Instamart = lazy(()=> import ("./components/Instamart"));
 const About = lazy(()=> import ("./components/About"));
 const AppLayout = () => {
+  const[user, setUser] = useState({
+    name: "Govind Singh",
+    email: " sample@gmail.com",
+  })
  return(
 <>
     <Header />
@@ -33,7 +37,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Body />,
+        element: <Body user ={user} />,
       },
       {
         path: "about",
