@@ -11,9 +11,12 @@ const Body = (user) => {
   const [allSolars, setAllSolars] = useState([]);
   const [filteredSolars, setFilteredSolars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [dataSource, setDataSource] = useState(""); // "api" | "constant"
+  const [dataSource, setDataSource] = useState(""); // "api" | "constant" 
 
   useEffect(() => {
+
+
+
     getSolars();
   }, []);
 

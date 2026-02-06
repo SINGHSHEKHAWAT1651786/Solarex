@@ -14,6 +14,7 @@ const SolarCard = ({
       <img src={IMG_CDN_URL + cloudinaryImageId} alt={name} />
       <h2 className="font-bold text-xl">{name}</h2>
       <h4>{cuisines.join(", ")}</h4>
+      
       <h4>{area}</h4>
       <h4>{totalRatingsString}</h4>
       <h4>{lastMileTravelString}</h4>
