@@ -13,7 +13,7 @@ const Section = ({ title, description }) => {
             >
                 {isVisible ? "Hide" : "Show"}
             </button>
-
+ 
             {isVisible && <p>{description}</p>}
         </div>
     );
@@ -31,14 +31,14 @@ const Instamart = () => {
             <Section
                 title={"About"}
                 description="Instamart is a fast delivery service."
-                isVisible={visibleSection === "About"}
+                isVisible={visibleSection === "About"} 
                 setIsVisible={() =>
-                    setSectionConfig({
+                    setSectionConfig({ 
                         showAbout: true,
                         showTeam: false,
                         //showCareers: false,
                     })
-                }
+                }                                                                           
 
             />
 

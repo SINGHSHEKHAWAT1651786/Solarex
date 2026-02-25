@@ -10,7 +10,7 @@ import Error from "./components/Error";
 import SolarMenu from "./components/SolarMenu";
 import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
-
+import UserContext from "./utils/UserContext";
 const Instamart = lazy(() => import("./components/Instamart"));
 const About = lazy(() => import("./components/About"));
 
@@ -24,9 +24,17 @@ const AppLayout = () => {
 
   return (
     <>
-      <Header />
+    <UserContext.Provider
+    value={{
+      user: user,
+      setUser: setUser,
+    }}
+    > 
+ <Header />
       <Outlet context={{ user, setUser }} />
       <Footer />
+    </UserContext.Provider>
+     
     </>
   );
 };
