@@ -10,7 +10,7 @@ const Cart = () => {
     return (
         <div>
             <h1 className="font-bold text-3xl"> Cart Items - {cartItems.length}</h1>
-            <button className="btn-green-100 p-2 m-5" onClick={() => handleClearCart()}></button>
+            <button className="bg-green-100 p-2 m-5" onClick={() => handleClearCart()}></button>
             <div className="flex">
                 {cartItems.map(item => <SolarItem key={item.id} {...item[0]} />)}
             </div>

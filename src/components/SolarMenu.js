@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
 import useSolar from "../utils/useSolar";
 import Shimmer from "./Shimmer";
-import {addItem} from "../utils/cartSlice";
+import {addItem} from "../utils/cartSlices";
 import {useDispatch} from "react-redux";
 const SolarMenu = () => {
     const {resId} = useParams();
