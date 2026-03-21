@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 const Title = () => (
   <Link to="/">
     <img
+    data-testid="logo"
       className="h-10"
       alt="Solarsant"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxSuZFNdbLTr4YKWrEFZhlyfdlcj8WWMHpqFRmOtGGbw&s"

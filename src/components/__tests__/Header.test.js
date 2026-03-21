@@ -13,5 +13,8 @@ const header = render(
 
 </StaticRouter>
 );
-console.log(header);
+const logo =header.getAllByTestId("logo");
+console.log(logo[0]);
+expect(logo[0].in).toBe("http://localhost/dummy.png");
+
 });
