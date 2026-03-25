@@ -43,6 +43,7 @@ const cartItems = useSelector(store => store.cart.items);
       >
         {isLoggedIn ? "Logout" : "Login"}
       </button>
+      
     </div>
   );
 };

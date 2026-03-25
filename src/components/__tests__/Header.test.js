@@ -18,3 +18,4 @@ console.log(logo[0]);
 expect(logo[0].in).toBe("http://localhost/dummy.png");
 
 });
+
