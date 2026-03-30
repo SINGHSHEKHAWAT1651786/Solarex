@@ -29,8 +29,8 @@ const header = render(
 
 </StaticRouter>
 );
-const logo =header.getAllByTestId("logo");
-console.log(logo[0]);
-expect(logo[0].in).toBe("http://localhost/dummy.png");
+const onlineStatus =header.getByTestId("online-status");
+
+expect(onlineStatus.innerHTML).toBe("Right");
 
 });
