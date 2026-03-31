@@ -6,7 +6,8 @@ import {StaticRouter} from "react-router-dom/server";
 import {SOLAR_DATA} from "./data";
 global.fetch = jest.fn(()=>{
  Promise.resolve({
-    json: Promise.resolve(SOLAR_DATA),
+    json:() => {Promise.resolve(SOLAR_DATA)},
+        
  });
 });
 test(
