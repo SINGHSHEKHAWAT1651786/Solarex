@@ -19,6 +19,6 @@ test(
                 </Provider>
             </StaticRouter>
         );
-        console.log(body);
+     const search = body.getByTestId("search");
     }
 );
