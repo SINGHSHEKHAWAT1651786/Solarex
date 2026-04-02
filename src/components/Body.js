@@ -83,7 +83,9 @@ const Body = (user) => {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <button className="p-1 m-1 bg-purple-900 hover:bg-yellow-600 text-white rounded-md " onClick={()=>{
+        <button 
+        data-testid="search-btn"
+        className="p-1 m-1 bg-purple-900 hover:bg-yellow-600 text-white rounded-md " onClick={()=>{
           const data = filterData(searchText, allSolars);
           setFilteredSolars(data);
         }}>Search</button>

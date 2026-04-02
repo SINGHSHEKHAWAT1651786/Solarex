@@ -19,6 +19,7 @@ test(
                 </Provider>
             </StaticRouter>
         );
-     const search = body.getByTestId("search");
+     const searchBtn = body.getByTestId("search-btn");
+     console.log(searchBtn);
     }
 );
